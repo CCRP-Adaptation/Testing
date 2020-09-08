@@ -34,14 +34,7 @@ df %>%
   ggtitle("MACA Centroid, CCSM4, RCP 8.5")
 
 centroid.wica <- filter(nps_boundary_centroids, UNIT_CODE == "WICA")
-centroid.wica <- as_Spatial(centroid.wica)
-
-#e <- cftdata(park = "Isle Royale National Park", parameters = "pr", years = c(2005, 2006), models = "CCSM4", scenarios = "rcp45")
-
-e <- cftdata(aoi = centroid.wica, area_name = "WICA", 
-             years = c(2005, 2006), models = "CCSM4", scenarios = "rcp45")
-
-df2 <- cft_df(e, ncores = 2)
+centroid.wicadf2 <- cft_df(e, ncores = 2)
 
 df2 %>%
   ggplot(aes(date, pr)) + 
@@ -49,4 +42,11 @@ df2 %>%
   geom_line(alpha = .1) + 
   xlab("Date") + 
   ylab("Precipitation (mm)") + 
-  ggtitle("Wind Cave Centroid, CCSM4, RCP 4.5")
+  ggtitle("Wind Cave Centroid, CCSM4, RCP 4.5") <- as_Spatial(centroid.wica)
+
+#e <- cftdata(park = "Isle Royale National Park", parameters = "pr", years = c(2005, 2006), models = "CCSM4", scenarios = "rcp45")
+
+e <- cftdata(aoi = centroid.wica, area_name = "WICA", 
+             years = c(2005, 2006), models = "CCSM4", scenarios = "rcp45")
+
+
